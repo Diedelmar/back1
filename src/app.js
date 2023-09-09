@@ -1,3 +1,18 @@
+const express = require('express');
+const fs = require('fs');
+const ProductManager = require('./productManager'); 
+const app = express();
+const port = process.env.PORT || 3000;
+
+
+const productManager = new ProductManager("products.json");
+class ProductManager {
+  constructor(filePath) {
+    this.products = [];
+    this.path = filePath;
+    this.loadProducts();
+  }
+
 app.use(express.json());
 
 app.get('/products', (req, res) => {

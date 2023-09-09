@@ -126,3 +126,5 @@ productManager.deleteProduct(1);
 const nonExistentProduct = productManager.getProductById(5);
 
 console.log("Hola, esto es un mensaje de prueba.");
+
+
