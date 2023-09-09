@@ -1,22 +1,4 @@
-const express = require('express');
-const fs = require('fs');
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-class ProductManager {
-    constructor(filePath) {
-        this.products = [];
-        this.path = filePath;
-        this.loadProducts();
-      }
-      
-}
-
-const productManager = new ProductManager("products.json");
-
 app.use(express.json());
-
 
 app.get('/products', (req, res) => {
   const { limit } = req.query;
@@ -29,7 +11,6 @@ app.get('/products', (req, res) => {
     res.json({ products: allProducts });
   }
 });
-
 
 app.get('/products/:pid', (req, res) => {
   const { pid } = req.params;
