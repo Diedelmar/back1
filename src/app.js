@@ -1,17 +1,36 @@
 const express = require('express');
 const fs = require('fs');
-const ProductManager = require('./productManager'); 
-const app = express();
-const port = process.env.PORT || 3000;
 
-
-const productManager = new ProductManager("products.json");
 class ProductManager {
   constructor(filePath) {
     this.products = [];
     this.path = filePath;
     this.loadProducts();
   }
+
+  loadProducts() {
+    try {
+      const data = fs.readFileSync(this.path, 'utf8');
+      this.products = JSON.parse(data);
+    } catch (error) {
+      console.error('Error loading products:', error);
+      this.products = [];
+    }
+  }
+
+  getProducts() {
+    return this.products;
+  }
+
+  getProductById(id) {
+    return this.products.find(product => product.id === id);
+  }
+}
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+const productManager = new ProductManager("products.json");
 
 app.use(express.json());
 
